@@ -53,3 +53,15 @@ class Note(models.Model):
 
     class Admin:
         pass
+
+class PhoneNumber(models.Model):
+
+    # Name for the phone number
+    name = models.CharField(max_length=255)
+    # Phone number field.
+    number = models.CharField(max_length=15)
+    # Item it references
+    item = models.ForeignKey(Item)
+
+    class Admin:
+        pass
