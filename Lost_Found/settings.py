@@ -28,9 +28,11 @@ SECRET_KEY = 'o1ggk%q06k(n%y4qz8$7ae&fl=xvldfngzo#i*1o51ay(dneh6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-TEMPLATE_DEBUG = True
-
 ALLOWED_HOSTS = []
+
+# This value is used to configure how many legal days the Hotel is requred to store
+# lost and found items before they can dispose of them.
+LEGAL_STORAGE_DAYS = 60
 
 
 # Application definition
@@ -42,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+	'Lost_Found.apps.index',
 ]
 
 MIDDLEWARE = [
@@ -59,7 +62,7 @@ ROOT_URLCONF = 'Lost_Found.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [rel_path('template')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -84,13 +87,6 @@ DATABASES = {
         'NAME': rel_path("lostandfound.db"),
     }
 }
-
-TEMPLATE_DIRS = (
-	# Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-	# Always use forward slashes, even on Windows.
-	# Don't forget to use absolute paths, not relative paths.
-	rel_path('templates'),
-)
 
 
 # Password validation

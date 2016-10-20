@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %}
+  Overview - Lost &amp; Found
+{% endblock %}
+
+{% block head %}
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+.here {
+  background-color: green;
+}
+.deephere {
+  background-color: yellow;
+}
+.gone {
+  background-color: red;
+}
+</style>
+{% endblock %}
+
+{# Body where everything happens. #}
+{% block body %}
+  <div class="items">
+    <table>
+  <tr>
+    <th>Guest Name</th>
+    <th>Room</th>
+    <th>PMS itinerary</th>
+    <th>Location</th>
+    <th>Status</th>
+    <th>Date Added</th>
+    <th>Description</th>
+  </tr>
+    {% for n in items %}
+      <tr>
+        <td>{{ n.guestname }}</td>
+        <td>{{ n.roomnum }}</td>
+        <td>{{ n.itinerary }}</td>
+        <td>{{ n.location }}</td>
+        <td style="background-color: {{ n.get_status_color }};">{{ n.get_status }}</td>
+        <td style="background-color: {{ n.get_legal_color }};">{{ n.added|date }}</td>
+        <td>{{ n.desc|truncatechars:50 }}</td>
+      </tr>
+    {% endfor %}
+    </table>
+  </div>
+{% endblock %}

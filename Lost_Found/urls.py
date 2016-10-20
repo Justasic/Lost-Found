@@ -15,8 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from Lost_Found.apps.index.views import overview
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', 'Lost_Found.apps.index.views.overview'),
+    url(r'^$', overview),
 ]
