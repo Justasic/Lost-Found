@@ -6,15 +6,44 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+  <style>
+  body {
+      font-family: 'Tangerine', serif;
+      font-size: 12px;
+    }
+  </style>
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine">
+
     <title>{% block title %}{% endblock %}</title>
     {% block head %}
     {% endblock %}
 </head>
 <body>
+    {# Search bar and navigation #}
+    <div id="Search">
+      <form action="#">
+        Search: <input type="text" name="search">
+      </form>
+    </div>
 {% block body %}
 {% endblock %}
 
 {% block scripts %}
 {% endblock %}
+{% comment %}
+Handle the real-time search for the item. Shows as a drop-down box under the search field.
+Clicking on a list item takes you to the item.html view.
+{% endcomment %}
+<script rel="javascript">
+  $("Search").changed(function(){
+    // Get the query string from the field
+    var querystring = $("Search");
+    $.get("/search_api/", {"query": querystring}).fail(function(){
+
+    })
+  });
+</script>
 </body>
+
 </html>

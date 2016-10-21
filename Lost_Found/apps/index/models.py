@@ -51,7 +51,6 @@ class Item(models.Model):
         # divide the number of legal days by the maximum color value
         # this way we know how much to add/subtract from red/green
         colordelim = 255 / settings.LEGAL_STORAGE_DAYS;
-        print "colordelim: %d" % colordelim
         # get number of days it's been stored here
         days = self.get_days_stored()
         # Calculate the value to subtract from the RGB value
@@ -61,9 +60,7 @@ class Item(models.Model):
             b = 0
         else:
             r = colordelim * days # Number of days times the color value to add based on LEGAL_STORAGE_DAYS
-            print "red: %d" % r
             g = 255 - r # Subtract that from 255 of green, this produces the gradiant during transition days
-            print "green: %d" % g
             b = 0 # blue is never here.
 
         # Return our HEX value for Django to use.
